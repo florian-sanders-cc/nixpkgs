@@ -32,10 +32,6 @@ buildNpmPackage rec {
     homepage = "https://github.com/CleverCloud/clever-tools";
     description = "Deploy on Clever Cloud and control you applications, add-ons, services from command line";
     license = licenses.asl20;
-    # TODO:
-    # - disable nixd and fix formatting
-    # - add changelog
-    # - go PR
     maintainers = with maintainers; [ floriansanderscc ];
   };
 }
