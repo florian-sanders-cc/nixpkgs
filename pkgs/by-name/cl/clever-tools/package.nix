@@ -18,7 +18,7 @@ buildNpmPackage rec {
     hash = "sha256-MVXot7PbS7Jwn2hwxLJf2PpgPap/hDta2OT4xwiBDu0=";
   };
 
-  npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  npmDepsHash = "sha256-CgT4QECuxcplA6xzzciSZzw+sq8gZR/CNH08GcBZsws=";
 
   dontNpmBuild = true;
 
