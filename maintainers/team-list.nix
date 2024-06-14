@@ -143,6 +143,15 @@ with lib.maintainers; {
     enableFeatureFreezePing = true;
   };
 
+  clevercloud = {
+    members = [
+      floriansanderscc
+    ];
+    scope = "Maintain Clever Cloud related packages.";
+    shortName = "CleverCloud";
+    githubTeams = [ "CleverCloud" ];
+  };
+
   cloudposse = {
     members = [
       dudymas
