@@ -1,6 +1,7 @@
 { lib
 , buildNpmPackage
 , fetchFromGitHub
+, installShellFiles
 , nodejs_18
 }:
 
@@ -22,10 +23,12 @@ buildNpmPackage rec {
 
   dontNpmBuild = true;
 
+  nativeBuildInputs = [ installShellFiles ];
+
   postInstall = ''
-    mkdir -p $out/share/{bash-completion/completions,zsh/site-functions}
-    $out/bin/clever --bash-autocomplete-script $out/bin/clever > $out/share/bash-completion/completions/clever
-    $out/bin/clever --zsh-autocomplete-script $out/bin/clever > $out/share/zsh/site-functions/_clever
+    installShellCompletion --cmd clever \
+      --bash <($out/bin/clever --bash-completion) \
+      --zsh <($out/bin/clever --zsh-completion)
     rm $out/bin/install-clever-completion
     rm $out/bin/uninstall-clever-completion
   '';
