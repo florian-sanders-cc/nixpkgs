@@ -27,8 +27,8 @@ buildNpmPackage rec {
 
   postInstall = ''
     installShellCompletion --cmd clever \
-      --bash <($out/bin/clever --bash-completion) \
-      --zsh <($out/bin/clever --zsh-completion)
+      --bash <($out/bin/clever --bash-autocomplete-script) \
+      --zsh <($out/bin/clever --zsh-autocomplete-script)
     rm $out/bin/install-clever-completion
     rm $out/bin/uninstall-clever-completion
   '';
