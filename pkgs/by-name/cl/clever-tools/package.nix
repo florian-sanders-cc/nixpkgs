@@ -27,16 +27,19 @@ buildNpmPackage rec {
 
   makeWrapperArgs = [ "--set NO_UPDATE_NOTIFIER true" ];
 
-  postInstall =
-    lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
-      installShellCompletion --cmd clever \
-        --bash <($out/bin/clever --bash-autocomplete-script $out/bin/clever) \
-        --zsh <($out/bin/clever --zsh-autocomplete-script $out/bin/clever)
-    ''
-    + ''
-      rm $out/bin/install-clever-completion
-      rm $out/bin/uninstall-clever-completion
-    '';
+  installPhase = ''
+    chmod +x build/clever.cjs
+    cp -r build $out
+    mkdir $out/bin
+    mv $out/clever.cjs $out/bin/clever
+    runHook postInstall
+  '';
+
+  postInstall = lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
+    installShellCompletion --cmd clever \
+      --bash <($out/bin/clever --bash-autocomplete-script $out/bin/clever) \
+      --zsh <($out/bin/clever --zsh-autocomplete-script $out/bin/clever)
+  '';
 
   meta = with lib; {
     homepage = "https://github.com/CleverCloud/clever-tools";
